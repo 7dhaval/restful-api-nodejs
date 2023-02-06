@@ -1,0 +1,29 @@
+{
+  "name": "restful-api-nodejs",
+  "version": "1.0.0",
+  "description": "Cretaed REST API for Student Registration using nodejs, expressjs and MongoDB",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node src/app.js",
+    "dev": "nodemon src/app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/7dhaval/restful-api-nodejs.git"
+  },
+  "author": "Dhavalsinh Sonasaniya",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/7dhaval/restful-api-nodejs/issues"
+  },
+  "homepage": "https://github.com/7dhaval/restful-api-nodejs#readme",
+  "dependencies": {
+    "express": "^4.18.2",
+    "express-validator": "^6.14.3",
+    "expressjs": "^1.0.1",
+    "mongoose": "^6.9.0",
+    "validator": "^13.9.0",
+    "Validator": "^1.1.4"
+  }
+}
