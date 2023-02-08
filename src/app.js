@@ -1,6 +1,7 @@
 const express = require("express");
 require("./db/conn");
 const Student = require("./models/students");
+const StudentRouter = require("./routers/route");
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -26,72 +27,84 @@ app.use(express.json());//this wil help to get the data using expree.json
 //     // res.send("Hello From Other Side.");
 // });
 
-//using Async Function same code we are created above without using async
-app.post("/students", async(req, res) =>{
 
-    try { 
-        const user = new Student(req.body);
-        const createUser =  await user.save();
-        res.status(201).send(createUser);    
-    }
-    catch(err){ res.status(400).send(err);} 
-});
-
+//1: create a new router
+////const router = new express.Router();
+//2: we need to define the router
+//// router.get("/dhaval", (req, res) => {
+////     res.send("Hello from Router");
+//// });
+//3: we need to register router
+app.use(StudentRouter);
 
 
-//read the data of regirstered students
-app.get("/students", async(req, res) =>{
-     try{
-        const StudentsData = await Student.find();
-        res.send(StudentsData);
-     }catch(err){
-        res.status(400).send(err);
-     }
-});
 
-//GET individual student data
-app.get("/students/:id", async (req, res) => {
-    try{
-        const _id = req.params.id;
-        const studentData = await Student.findById(_id);
-        console.log(studentData);
-        if(!studentData){
-            return res.status(404).send();
-        }else{
-            return res.send(studentData);
-        }
-        res.send(studentData);
-    }catch(err){
-        res.status(500).send(err);
-    }
-});
+// //using Async Function same code we are created above without using async
+// app.post("/students", async(req, res) =>{
 
-//update the student by its id
-app.patch("/students/:id", async(req,res) => {
-    try{
-        const _id = req.params.id;
-        const updateStudents = await Student.findByIdAndUpdate(_id,req.body ,{
-            new:true
-        });
-        res.send(updateStudents);
-    }catch(err){
-        res.status(400).send(e);
+//     try { 
+//         const user = new Student(req.body);
+//         const createUser =  await user.save();
+//         res.status(201).send(createUser);    
+//     }
+//     catch(err){ res.status(400).send(err);} 
+// });
 
-    }
-})
 
-//delete the student by it id
-app.delete("/students/:id", async(req, res) => {
-    try{
-        const deleteStudent = await Student.findByIdAndDelete(req.params.id);
-        if(!req.params.id){
-            return res.status(400).send();
-        }
-        res.send(deleteStudent);
-    }catch(err){
-        res.status(500).send(e);
-    }
-})
+
+// //read the data of regirstered students
+// app.get("/students", async(req, res) =>{
+//      try{
+//         const StudentsData = await Student.find();
+//         res.send(StudentsData);
+//      }catch(err){
+//         res.status(400).send(err);
+//      }
+// });
+
+// //GET individual student data
+// app.get("/students/:id", async (req, res) => {
+//     try{
+//         const _id = req.params.id;
+//         const studentData = await Student.findById(_id);
+//         console.log(studentData);
+//         if(!studentData){
+//             return res.status(404).send();
+//         }else{
+//             return res.send(studentData);
+//         }
+//         res.send(studentData);
+//     }catch(err){
+//         res.status(500).send(err);
+//     }
+// });
+
+// //update the student by its id
+// app.patch("/students/:id", async(req,res) => {
+//     try{
+//         const _id = req.params.id;
+//         const updateStudents = await Student.findByIdAndUpdate(_id,req.body ,{
+//             new:true
+//         });
+//         res.send(updateStudents);
+//     }catch(err){
+//         res.status(400).send(e);
+
+//     }
+// })
+
+// //delete the student by it id
+// app.delete("/students/:id", async(req, res) => {
+//     try{
+//         const deleteStudent = await Student.findByIdAndDelete(req.params.id);
+//         if(!req.params.id){
+//             return res.status(400).send();
+//         }
+//         res.send(deleteStudent);
+//     }catch(err){
+//         res.status(500).send(e);
+//     }
+// });
 
 
 
