@@ -4,6 +4,7 @@ mongoose.set('strictQuery', false);
 mongoose.connect("mongodb://127.0.0.1:27017/students-api", {
     useNewUrlParser: true,
     useUnifiedTopology: true,
+    // useFindAndModify:false,
     // useCreateIndex:true
 }).then (() => {
     console.log("connection is successful with DB");

@@ -66,6 +66,33 @@ app.get("/students/:id", async (req, res) => {
     }
 });
 
+//update the student by its id
+app.patch("/students/:id", async(req,res) => {
+    try{
+        const _id = req.params.id;
+        const updateStudents = await Student.findByIdAndUpdate(_id,req.body ,{
+            new:true
+        });
+        res.send(updateStudents);
+    }catch(err){
+        res.status(400).send(e);
+
+    }
+})
+
+//delete the student by it id
+app.delete("/students/:id", async(req, res) => {
+    try{
+        const deleteStudent = await Student.findByIdAndDelete(req.params.id);
+        if(!req.params.id){
+            return res.status(400).send();
+        }
+        res.send(deleteStudent);
+    }catch(err){
+        res.status(500).send(e);
+    }
+})
+
 
 
 app.listen(port, () => {
